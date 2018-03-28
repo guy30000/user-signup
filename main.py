@@ -24,7 +24,7 @@ formU = """
                     <td><label for="username">Username</label></td>
                     <td>
                         <input name="username" type="text" value="">
-                        <span class="error"></span>
+                        <span class="error">{usernamefail}</span>
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +61,16 @@ def index():
     fill_in_content = formU
     return fill_in_content
 
-
+@app.route("/", methods=['POST'])
+def UID_validate():  #Username verification
+    usernameA = request.form['username']
+    uidX = 0 #tests uid length p1
+    for char in usernameA:
+        uidX =  uidX + 1
+    
+    if uidX < 3 or uidX > 20:
+        uidlngth = "User ID must be 3 - 20 characters."
+        return formU.format(usernamefail=uidlngth)
 
 
 
