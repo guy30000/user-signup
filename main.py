@@ -10,7 +10,6 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 formU = """
-<!DOCTYPE html>
 
 <html>
     <head>
@@ -23,8 +22,8 @@ formU = """
                 <tr>
                     <td><label for="username">Username</label></td>
                     <td>
-                        <input name="username" type="text" value="">
-                        <span class="error">{usernamefail}</span>
+                        <input name="username" type="text" value="" /></input>
+                        <span class="error" value="">{usernamefail}</span>
                     </td>
                 </tr>
                 <tr>
@@ -58,8 +57,7 @@ formU = """
 
 @app.route("/")
 def index():
-    fill_in_content = formU
-    return fill_in_content
+    return formU
 
 
 
@@ -127,26 +125,11 @@ def password_validate():  #Actually all validate
 
 
 
-    if pswrdfailA or usernamefailA or emailfailA:      
-        return formU.format(pswrdfail=pswrdfailA, usernamefail=usernamefailA, emailfail=emailfailA)
+    if pswrdfailA or usernamefailA or emailfailA:    
+        return formU.format(pswrdfail=pswrdfailA, usernamefail=usernamefailA, emailfail=emailfailA, username=usernameA)
     else: 
         return '<h1>Hello, ' + usernameA + ", and welcome to our nacho barn!</h1>"
 
-
-    
-
-
-
-###This is dead currently
-@app.route("/hello", methods=['POST'])
-def hello():
-    first_name = request.form['first_name']
-    template = jinja_env.get_template('hello_greeting.html')
-    return template.render(name=first_name)
-
-
-
-        
 
 
 app.run()
