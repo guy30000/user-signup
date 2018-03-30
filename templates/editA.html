@@ -7,7 +7,9 @@
                 <tr>
                     <td><label for="username">Username</label></td>
                     <td>
-                        <input name="username" type="text" value="" /></input>
+                        <!--input name="username" type="text" value="" /></input-->
+                        <input name="username" type="text" value= {{ usernameC }} ></input>
+
                         <span class='error'>{{ usernamefailB }}</span>
                     </td>
                 </tr>
@@ -28,7 +30,7 @@
                 <tr>
                     <td><label for="email">Email (optional)</label></td>
                     <td>
-                        <input name="email" value="">
+                        <input name="email" value= {{ emailC }} >
                         <span class='error'>{{ emailfailB }}</span>
                     </td>
                 </tr>

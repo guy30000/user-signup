@@ -82,7 +82,7 @@ def password_validate():  #Actually all validate
 
 
     if pswrdfailA or usernamefailA or emailfailA:    
-        return render_template('editA.html', usernamefailB=usernamefailA, pswrdfailB=pswrdfailA, emailfailB=emailfailA)
+        return render_template('editA.html', usernamefailB=usernamefailA, pswrdfailB=pswrdfailA, emailfailB=emailfailA, usernameC=usernameA, emailC=emailA )
     else: 
         return render_template('hello_greeting.html', usernameB=usernameA)
 
