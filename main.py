@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 import cgi
 import os
 import jinja2
@@ -9,56 +9,11 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir), a
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-formU = """
-
-<html>
-    <head>
-        <style> .error {{ color: red; }} </style>
-    </head>
-    <body>
-    <h1>Signup</h1>
-        <form method="post">
-            <table>
-                <tr>
-                    <td><label for="username">Username</label></td>
-                    <td>
-                        <input name="username" type="text" value="" /></input>
-                        <span class="error" value="">{usernamefail}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="password">Password</label></td>
-                    <td>
-                        <input name="password" type="password">
-                        <span class="error"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="verify">Verify Password</label></td>
-                    <td>
-                        <input name="verify" type="password" />
-                        <span class="error">{pswrdfail}</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email (optional)</label></td>
-                    <td>
-                        <input name="email" value="">
-                        <span class="error">{emailfail}</span>
-                    </td>
-                </tr>
-            </table>
-            <input type="submit">
-        </form>
-    </body>
-</html>
-
-"""
-
 @app.route("/")
 def index():
-    return formU
-
+    #return formU
+    #encoded_error = request.args.get("error")
+    return render_template('editA.html')#, watchlist=get_current_watchlist(), error=encoded_error and cgi.escape(encoded_error, quote=True))
 
 
 
@@ -118,6 +73,7 @@ def password_validate():  #Actually all validate
             emailfailA = "Invalid email."
     else:
         emailfailA = "Invalid email." 
+
     if emlX == 0:    # ignores count if email is blank
             emailfailA = ''
 
@@ -126,9 +82,9 @@ def password_validate():  #Actually all validate
 
 
     if pswrdfailA or usernamefailA or emailfailA:    
-        return formU.format(pswrdfail=pswrdfailA, usernamefail=usernamefailA, emailfail=emailfailA, username=usernameA)
+        return render_template('editA.html', usernamefailB=usernamefailA, pswrdfailB=pswrdfailA, emailfailB=emailfailA)
     else: 
-        return '<h1>Hello, ' + usernameA + ", and welcome to our nacho barn!</h1>"
+        return render_template('hello_greeting.html', usernameB=usernameA)
 
 
 
